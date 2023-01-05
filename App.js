@@ -1,17 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, Button } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Shopping List</Text>
       <View style={styles.firstView}>
-        <Text style={styles.textColor}>Hola Coder!!</Text>
-        <StatusBar style="auto" />
+          <TextInput style={styles.textInput} placeholder='Escribe tu producto' />
+          <Button title='ADD' />
       </View>
       <View style={styles.secondView}>
-        <Text style={styles.textColor}>Proximamente Nueva App</Text>
-      </View>
-      <View style={styles.thirdView}>
         <Image style={styles.img} source={{ uri: "https://res.cloudinary.com/hdsqazxtw/image/upload/v1600707758/coderhouse-logo.png" }} />
       </View>
     </View>
@@ -20,34 +18,30 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:1,
     backgroundColor: '#2C5B5A',
-
-    justifyContent: 'center',
+    
+    paddingTop:60,
   },
-  textColor: {
-    color: 'white',
-    fontWeight: '500',
+  title:{
+    height:50,
+    textAlign:'center',
   },
-  firstView: {
-    flex: 2,
-    backgroundColor: '#5B352C',
-    alignItems: 'center',
-    justifyContent: 'center',
+  firstView:{
+    flexDirection: 'row',
+    justifyContent:'space-evenly'
   },
-  secondView: {
-    flex: 2,
-    backgroundColor: '#3F5B2C',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  thirdView: {
-    flex: 2,
-    backgroundColor: '#5B352C'
+  textInput:{
+    backgroundColor:'#fff',
+    height: 35,
+    width: 130,
+    
   },
   img: {
+
+    marginTop:20,
     width: '100%',
-    height: '100%',
+    height: 250,
 
   }
 });
