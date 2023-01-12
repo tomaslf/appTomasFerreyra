@@ -1,108 +1,138 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput, Button, FlatList, Modal } from 'react-native';
+import { StyleSheet, TouchableOpacity, ImageBackground, Text, View, Button, FlatList } from 'react-native';
 import { useState, useTransition } from 'react';
+import RadioButton from "react-native-animated-radio-button";
+import Modal from './src/components/Modal';
+import AddItem from './src/components/AddItem';
 
 export default function App() {
   const [textItem, setTextItem] = useState('');
   const [list, setList] = useState([]);
-  const [itemSelected, setItemSelected] = useState ('');
-  const [modalVisible, setModalVisible] = useState (false);
+  const [itemSelected, setItemSelected] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [checked, setChecked]= useState('white')
 
   const handleTextItem = (text) => {
     setTextItem(text)
   }
+
   const addItem = () => {
-    if (textItem === ""){
+    if (textItem === "") {
       alert('Este campo no puede estar vacío')
-    }else{
-      setList(currentState => 
+    } else {
+      setList(currentState =>
         [...currentState, textItem])
-  
       setTextItem("")
     }
   }
-  const renderItem = ({ item }) => (
-    <View style={styles.secondView}>
-      <Text style={styles.textSecondView}>
-        {item}
-      </Text>
-      <Button title='Edit' onPress={() => setModalVisible(true)}></Button>
-    </View>
-  )
-  
 
-  const removeItem = () =>{
-    setList([]);
+  const removeItem = (item) => {
+    setList(currentState => currentState.filter(element => element !== item))
     setModalVisible(false)
   }
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Mis Recetas</Text>
-      <View style={styles.firstView}>
-        <TextInput style={styles.textInput} onChangeText={handleTextItem} value={textItem} placeholder='Ingresa el ingrediente' />
-        <Button title='ADD' onPress={addItem} />
-      </View>
-      <View >
-        <FlatList
-          data={list}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id} />
-      </View>
-      <Modal style={styles.modal} animationType='fade'
-      transparent={true}
-      visible={modalVisible}>
-        <View>
-            <Text>
-                {itemSelected}
-            </Text>
-            <Button style={styles.Button} title='Delete' onPress={removeItem}/>
-          
-        </View>
+  const isChecked = () => {
+    setChecked('green')
+  }
 
-      </Modal>
+  const renderItem = ({ item }) => (
+    <View style={styles.secondView}>
+      <Text  style={styles.textSecondView} >
+        {item}
+      </Text>
+      <View style={styles.buttonGroup}>
+        <Button title='Edit' color='#A4A4A4' onPress={() => handleModal(item)}></Button>
+      </View>
+
     </View>
+  )
+
+  const handleModal = (item) => {
+    setItemSelected(item)
+    setModalVisible(true)
+  }
+
+  const clearList = () => {
+    setList([]);
+  }
+
+  return (
+
+    <View style={styles.container}>
+      <ImageBackground source={{ uri: "https://img.freepik.com/premium-photo/shopping-trolley-shopping-cart-yellow-background_51524-21454.jpg?w=2000" }} resizeMode="cover" style={styles.image}>
+
+        <Text style={styles.title}>Shopping List</Text>
+        <AddItem OnAddItem={() => addItem} handleText={() => handleTextItem} textValue={textItem} />
+        <View >
+          <FlatList
+            data={list}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id} />
+        </View>
+        <Modal removeItemFunction={() => removeItem(itemSelected)} closeModal={() => setModalVisible(false)} modalVisibleFunction={modalVisible} itemSelected={itemSelected} />
+
+        <View style={styles.clear}>
+          <Button color="#9E0000" title='Clear All' onPress={clearList} />
+        </View>
+      </ImageBackground>
+    </View>
+
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2C5B5A',
-
-    paddingTop: 60,
+    justifyContent: 'flex-start',
+  },
+  image: {
+    flex: 1,
+    paddingTop: 60
   },
   title: {
+    backgroundColor: 'white',
+    opacity: .6,
     height: 50,
     textAlign: 'center',
     fontSize: 35,
-    marginBottom: 5,
-  },
-  firstView: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly'
-  },
-  textInput: {
-    backgroundColor: '#fff',
-    height: 35,
-    width: 130,
-
+    fontWeight: 'bold',
+    marginBottom: 50,
   },
   secondView: {
     marginTop: 30,
     marginLeft: 20,
     flex: 2,
     flexDirection: 'row',
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    
   },
   textSecondView: {
+    backgroundColor:'white',
     fontSize: 20,
+    padding:5,
+    alignContent: 'center',
+    alignItems: 'center',
     textTransform: 'uppercase',
     marginRight: 10,
+    height: 40,
+    width: 200,
+    borderRadius: 10,
+
   },
-  modal:{
-    alignItems:'center'
-    ,width: 50, 
+  buttonGroup: {
+    flexDirection: 'row',
+    marginLeft: 5,
+  },
+  button: {
+    backgroundColor: 'green',
+    marginLeft: 5,
+    width: 40,
+    borderRadius: 20,
+
+  },
+  clear: {
+    color: 'red',
+    marginTop: 50,
   }
 });
