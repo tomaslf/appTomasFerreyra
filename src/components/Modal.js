@@ -11,9 +11,11 @@ const Modal = ({modalVisibleFunction,removeItemFunction,itemSelected,closeModal 
                     <Text style={styles.modalText}>
                         Delete {itemSelected}?
                     </Text>
-                   
-                    <Button style={styles.buttons} color="#9E0000" title='Delete' onPress={()=> removeItemFunction()} />
+                   <View style={styles.buttonContainer}>
+                   <Button style={styles.deleteButton} color="#9E0000" title='Delete' onPress={()=> removeItemFunction()} />
                     <Button title='Cancel' onPress={closeModal}></Button>
+                   </View>
+                    
         
                     
                 </View>
@@ -33,7 +35,6 @@ const styles = StyleSheet.create({
         
       },
       modal: {
-        height: 200,
         width: 250,
         padding:20,
         backgroundColor: 'black',
@@ -43,5 +44,10 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontWeight: 'bold',
         marginBottom: 20,
+      },
+      buttonContainer:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        paddingHorizontal:20,
       },
 })

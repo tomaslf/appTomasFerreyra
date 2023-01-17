@@ -1,6 +1,5 @@
-import { StyleSheet, TouchableOpacity, ImageBackground, Text, View, Button, FlatList } from 'react-native';
+import { StyleSheet, ImageBackground, Text, View, Button, FlatList } from 'react-native';
 import { useState, useTransition } from 'react';
-import RadioButton from "react-native-animated-radio-button";
 import Modal from './src/components/Modal';
 import AddItem from './src/components/AddItem';
 
@@ -9,14 +8,13 @@ export default function App() {
   const [list, setList] = useState([]);
   const [itemSelected, setItemSelected] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-  const [checked, setChecked]= useState('white')
 
   const handleTextItem = (text) => {
     setTextItem(text)
   }
 
   const addItem = () => {
-    if (textItem === "") {
+    if (!textItem) {
       alert('Este campo no puede estar vacío')
     } else {
       setList(currentState =>
@@ -30,9 +28,6 @@ export default function App() {
     setModalVisible(false)
   }
 
-  const isChecked = () => {
-    setChecked('green')
-  }
 
   const renderItem = ({ item }) => (
     <View style={styles.secondView}>
