@@ -1,72 +1,41 @@
-import { StyleSheet, ImageBackground, Text, View, Button, FlatList } from 'react-native';
-import { useState, useTransition } from 'react';
-import Modal from './src/components/Modal';
+import { useState } from 'react';
+import { StyleSheet, ImageBackground, Text, View, Button } from 'react-native';
 import AddItem from './src/components/AddItem';
+import Colors from './src/constants/Colors'
+import { useFonts } from 'expo-font';
+import List from './src/components/List';
+import ConfirmListScreen from './src/screens/ConfirmListScreen';
 
 export default function App() {
-  const [textItem, setTextItem] = useState('');
+
+  const [loaded] = useFonts({
+    OswaldRegular: require("./src/assets/fonts/Oswald-Bold.ttf"),
+  })
+
   const [list, setList] = useState([]);
-  const [itemSelected, setItemSelected] = useState('');
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const handleTextItem = (text) => {
-    setTextItem(text)
-  }
-
-  const addItem = () => {
-    if (!textItem) {
-      alert('Este campo no puede estar vacío')
-    } else {
-      setList(currentState =>
-        [...currentState, textItem])
-      setTextItem("")
-    }
-  }
-
-  const removeItem = (item) => {
-    setList(currentState => currentState.filter(element => element !== item))
-    setModalVisible(false)
-  }
-
-
-  const renderItem = ({ item }) => (
-    <View style={styles.secondView}>
-      <Text  style={styles.textSecondView} >
-        {item}
-      </Text>
-      <View style={styles.buttonGroup}>
-        <Button title='Edit' color='#A4A4A4' onPress={() => handleModal(item)}></Button>
-      </View>
-
-    </View>
-  )
-
-  const handleModal = (item) => {
-    setItemSelected(item)
-    setModalVisible(true)
-  }
 
   const clearList = () => {
     setList([]);
+}
+  const handleConfirmList= ()=>{
+    
+  }
+
+  
+  if (!loaded) {
+    return null
   }
 
   return (
 
     <View style={styles.container}>
-      <ImageBackground source={{ uri: "https://img.freepik.com/premium-photo/shopping-trolley-shopping-cart-yellow-background_51524-21454.jpg?w=2000" }} resizeMode="cover" style={styles.image}>
-
+      <ImageBackground source={{ uri: "https://static.vecteezy.com/system/resources/previews/006/044/573/non_2x/vintage-bakery-background-with-sketched-bread-illustration-free-vector.jpg" }} resizeMode="cover" style={styles.image}>
         <Text style={styles.title}>Shopping List</Text>
-        <AddItem OnAddItem={() => addItem} handleText={() => handleTextItem} textValue={textItem} />
-        <View >
-          <FlatList
-            data={list}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id} />
-        </View>
-        <Modal removeItemFunction={() => removeItem(itemSelected)} closeModal={() => setModalVisible(false)} modalVisibleFunction={modalVisible} itemSelected={itemSelected} />
-
-        <View style={styles.clear}>
-          <Button color="#9E0000" title='Clear All' onPress={clearList} />
+        
+        <List list={list} setList={setList} />
+        <View style={styles.buttonContainer}>
+          <Button color={Colors.deleteColor} title='Clear All' onPress={clearList} />
+          <Button color={Colors.confirmationColor} title='Confirm List' onPress={handleConfirmList} />
         </View>
       </ImageBackground>
     </View>
@@ -86,38 +55,12 @@ const styles = StyleSheet.create({
   },
   title: {
     backgroundColor: 'white',
-    opacity: .6,
-    height: 50,
+    height: 60,
     textAlign: 'center',
     fontSize: 35,
-    fontWeight: 'bold',
+    fontFamily: 'OswaldRegular',
     marginBottom: 50,
-  },
-  secondView: {
-    marginTop: 30,
-    marginLeft: 20,
-    flex: 2,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    
-  },
-  textSecondView: {
-    backgroundColor:'white',
-    fontSize: 20,
-    padding:5,
-    alignContent: 'center',
-    alignItems: 'center',
-    textTransform: 'uppercase',
-    marginRight: 10,
-    height: 40,
-    width: 200,
-    borderRadius: 10,
 
-  },
-  buttonGroup: {
-    flexDirection: 'row',
-    marginLeft: 5,
   },
   button: {
     backgroundColor: 'green',
@@ -126,8 +69,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
 
   },
-  clear: {
-    color: 'red',
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     marginTop: 50,
   }
 });
