@@ -2,7 +2,6 @@ import React from 'react'
 import { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native'
 import Modal from './Modal';
-import AddItem from './AddItem';
 import Colors from '../constants/Colors';
 
 
@@ -11,19 +10,7 @@ const List = ({ list, setList }) => {
 
     const [itemSelected, setItemSelected] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
-    const [textItem, setTextItem] = useState('');
-    const handleTextItem = (text) => {
-        setTextItem(text)
-    }
-    const addItem = () => {
-        if (!textItem) {
-            alert('Este campo no puede estar vacío')
-        } else {
-            setList(currentState =>
-                [...currentState, textItem])
-            setTextItem("")
-        }
-    }
+
 
     const removeItem = (item) => {
         setList(currentState => currentState.filter(element => element !== item))
@@ -40,7 +27,6 @@ const List = ({ list, setList }) => {
             <Text style={styles.textSecondView} >
                 {item}
             </Text>
-
             <View style={styles.buttonGroup}>
                 <Button title='Edit' color={Colors.disableColor} onPress={() => handleModal(item)}></Button>
             </View>
@@ -50,7 +36,7 @@ const List = ({ list, setList }) => {
     )
     return (
         <View >
-            <AddItem OnAddItem={() => addItem} handleText={() => handleTextItem} textValue={textItem} />
+
             <FlatList
                 data={list}
                 renderItem={renderItem}

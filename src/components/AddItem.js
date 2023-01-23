@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyleSheet,View, TextInput,Button } from 'react-native'
+import { StyleSheet, View, TextInput, Button } from 'react-native'
 import Colors from '../constants/Colors';
 
-const AddItem = ({OnAddItem,handleText,textValue}) => {
+const AddItem = ({ OnAddItem, handleText, textValue }) => {
 
     return (
         <View style={styles.firstView}>
@@ -18,11 +18,11 @@ const styles = StyleSheet.create({
     firstView: {
         flexDirection: 'row',
         justifyContent: 'space-evenly'
-      },
-      textInput: {
+    },
+    textInput: {
         backgroundColor: '#fff',
         height: 40,
         width: 200,
-         
-      },
+
+    },
 })
