@@ -2,9 +2,9 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 
-const Header = () => {
+const Header = ({title}) => {
   return (
-    <Text style={styles.title}>Shopping List</Text>
+    <Text style={styles.title}>{title}</Text>
   )
 }
 
@@ -13,7 +13,7 @@ export default Header
 const styles = StyleSheet.create({
     title: {
         backgroundColor: 'white',
-        height: 60,
+        height: 65,
         textAlign: 'center',
         fontSize: 35,
         fontFamily: 'OswaldRegular',

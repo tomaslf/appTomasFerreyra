@@ -35,7 +35,7 @@ export default function App() {
     setList([]);
   }
   const handleConfirmList = () => {
-   setConfirm(true)
+    setConfirm(true)
   }
 
   const goBack = () => {
@@ -52,13 +52,13 @@ export default function App() {
       {
         confirm ? (
           <>
-            <ConfirmListScreen list={list} setList={setList} />    
-              <Button color={Colors.deleteColor} title='Go Back' onPress={goBack} />
+            <ConfirmListScreen list={list} setList={setList} />
+            <Button color={Colors.deleteColor} title='Go Back' onPress={goBack} />
           </>) :
 
           (<>
             <ImageBackground source={{ uri: "https://static.vecteezy.com/system/resources/previews/006/044/573/non_2x/vintage-bakery-background-with-sketched-bread-illustration-free-vector.jpg" }} resizeMode="cover" style={styles.image}>
-              <Header />
+              <Header title={'Shopping List'} />
               <AddItem OnAddItem={() => addItem} handleText={() => handleTextItem} textValue={textItem} />
               <List list={list} setList={setList} />
               <View style={styles.buttonContainer}>
@@ -97,5 +97,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginTop: 50,
   },
-  
+
 });
