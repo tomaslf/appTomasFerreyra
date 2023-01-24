@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Button, Text, View, Modal as NewModal } from 'react-native'
-import Colors from '../constants/Colors';
+import colors from '../constants/colors';
 
 
 const Modal = ({ modalVisibleFunction, removeItemFunction, itemSelected, closeModal }) => {
@@ -14,8 +14,8 @@ const Modal = ({ modalVisibleFunction, removeItemFunction, itemSelected, closeMo
             Delete {itemSelected}?
           </Text>
           <View style={styles.buttonContainer}>
-            <Button style={styles.deleteButton} color={Colors.deleteColor} title='Delete' onPress={() => removeItemFunction()} />
-            <Button title='Cancel' color={Colors.disableColor} onPress={closeModal}></Button>
+            <Button style={styles.deleteButton} color={colors.deleteColor} title='Delete' onPress={() => removeItemFunction()} />
+            <Button title='Cancel' color={colors.disableColor} onPress={closeModal}></Button>
           </View>
 
         </View>

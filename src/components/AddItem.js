@@ -1,13 +1,13 @@
 import React from 'react'
 import { StyleSheet, View, TextInput, Button } from 'react-native'
-import Colors from '../constants/Colors';
+import colors from '../constants/colors';
 
 const AddItem = ({ OnAddItem, handleText, textValue }) => {
 
     return (
         <View style={styles.firstView}>
             <TextInput style={styles.textInput} onChangeText={handleText()} value={textValue} placeholder='Ingresa el producto' />
-            <Button title='ADD' color={Colors.confirmationColor} onPress={OnAddItem()} />
+            <Button title='ADD' color={colors.confirmationColor} onPress={OnAddItem()} />
         </View>
     )
 }

@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { StyleSheet, ImageBackground, Text, View, Button } from 'react-native';
-import Header from './src/components/Header';
-import Colors from './src/constants/Colors'
-import AddItem from './src/components/AddItem'
 import { useFonts } from 'expo-font';
+import Header from './src/components/Header';
+import Colors from './src/constants/colors'
 import List from './src/components/List';
 import ConfirmListScreen from './src/screens/ConfirmListScreen';
 
@@ -12,28 +11,13 @@ export default function App() {
   const [loaded] = useFonts({
     OswaldRegular: require("./src/assets/fonts/Oswald-Bold.ttf"),
   })
-  const [textItem, setTextItem] = useState('');
-
-  const addItem = () => {
-    if (!textItem) {
-      alert('Este campo no puede estar vacío')
-    } else {
-      setList(currentState =>
-        [...currentState, textItem])
-      setTextItem('')
-
-    }
-  }
-  const handleTextItem = (text) => {
-    setTextItem(text)
-  }
-  const [confirm, setConfirm] = useState(false);
-
   const [list, setList] = useState([]);
-
+  const [confirm, setConfirm] = useState(false);
+  
   const clearList = () => {
     setList([]);
   }
+
   const handleConfirmList = () => {
     setConfirm(true)
   }
@@ -59,8 +43,7 @@ export default function App() {
           (<>
             <ImageBackground source={{ uri: "https://static.vecteezy.com/system/resources/previews/006/044/573/non_2x/vintage-bakery-background-with-sketched-bread-illustration-free-vector.jpg" }} resizeMode="cover" style={styles.image}>
               <Header title={'Shopping List'} />
-              <AddItem OnAddItem={() => addItem} handleText={() => handleTextItem} textValue={textItem} />
-              <List list={list} setList={setList} />
+              <List list={list} setList={setList}/>
               <View style={styles.buttonContainer}>
                 <Button color={Colors.deleteColor} title='Clear All' onPress={clearList} />
                 <Button color={Colors.confirmationColor} title='Go Shop' onPress={handleConfirmList} />

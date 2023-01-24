@@ -2,15 +2,30 @@ import React from 'react'
 import { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native'
 import Modal from './Modal';
-import Colors from '../constants/Colors';
+import AddItem from './AddItem';
+import colors from '../constants/colors';
 
 
 
-const List = ({ list, setList }) => {
+const List = ({list, setList}) => {
 
     const [itemSelected, setItemSelected] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [textItem, setTextItem] = useState('');
+    
+    const addItem = () => {
+        if (!textItem) {
+            alert('Este campo no puede estar vacío')
+        } else {
+            setList(currentState =>
+                [...currentState, textItem])
+            setTextItem('')
 
+        }
+    }
+    const handleTextItem = (text) => {
+        setTextItem(text)
+    }
 
     const removeItem = (item) => {
         setList(currentState => currentState.filter(element => element !== item))
@@ -22,13 +37,18 @@ const List = ({ list, setList }) => {
         setModalVisible(true)
     }
 
+
+
+
+
+
     const renderItem = ({ item }) => (
         <View style={styles.secondView}>
             <Text style={styles.textSecondView} >
                 {item}
             </Text>
             <View style={styles.buttonGroup}>
-                <Button title='Edit' color={Colors.disableColor} onPress={() => handleModal(item)}></Button>
+                <Button title='Edit' color={colors.disableColor} onPress={() => handleModal(item)}></Button>
             </View>
             <Modal removeItemFunction={() => removeItem(itemSelected)} closeModal={() => setModalVisible(false)} modalVisibleFunction={modalVisible} itemSelected={itemSelected} />
 
@@ -36,7 +56,7 @@ const List = ({ list, setList }) => {
     )
     return (
         <View >
-
+            <AddItem OnAddItem={() => addItem} handleText={() => handleTextItem} textValue={textItem} />
             <FlatList
                 data={list}
                 renderItem={renderItem}
