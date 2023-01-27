@@ -1,10 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, View, ImageBackground } from 'react-native'
+import { StyleSheet, View, ImageBackground, Button } from 'react-native'
 import List from '../components/List'
 import Header from '../components/Header'
 
 
-const ConfirmListScreen = ({ list, setList }) => {
+const ConfirmListScreen = ({ list, setList, navigation }) => {
   return (
     <>
       <ImageBackground source={{ uri: "https://p0.piqsels.com/preview/933/348/32/cart-chrome-commerce-dark.jpg" }} resizeMode="cover" style={styles.image}>
@@ -12,6 +12,7 @@ const ConfirmListScreen = ({ list, setList }) => {
           <Header title={'Go Shop'} />
           <List list={list} setList={setList} />
         </View>
+        <Button title='Go Home' onPress={()=> navigation.navigate('Home') } />
       </ImageBackground>
     </>
 

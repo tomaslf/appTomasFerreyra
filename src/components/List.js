@@ -11,22 +11,7 @@ const List = ({list, setList}) => {
 
     const [itemSelected, setItemSelected] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
-    const [textItem, setTextItem] = useState('');
     
-    const addItem = () => {
-        if (!textItem) {
-            alert('Este campo no puede estar vacío')
-        } else {
-            setList(currentState =>
-                [...currentState, textItem])
-            setTextItem('')
-
-        }
-    }
-    const handleTextItem = (text) => {
-        setTextItem(text)
-    }
-
     const removeItem = (item) => {
         setList(currentState => currentState.filter(element => element !== item))
         setModalVisible(false)
@@ -36,11 +21,6 @@ const List = ({list, setList}) => {
         setItemSelected(item)
         setModalVisible(true)
     }
-
-
-
-
-
 
     const renderItem = ({ item }) => (
         <View style={styles.secondView}>
@@ -56,7 +36,6 @@ const List = ({list, setList}) => {
     )
     return (
         <View >
-            <AddItem OnAddItem={() => addItem} handleText={() => handleTextItem} textValue={textItem} />
             <FlatList
                 data={list}
                 renderItem={renderItem}
