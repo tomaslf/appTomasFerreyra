@@ -2,7 +2,6 @@ import React from 'react'
 import { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native'
 import Modal from './Modal';
-import AddItem from './AddItem';
 import colors from '../constants/colors';
 
 
