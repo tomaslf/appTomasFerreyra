@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { StyleSheet, View, ImageBackground, Button } from 'react-native'
 import Header from '../components/Header'
@@ -6,6 +7,7 @@ import colors from '../constants/colors'
 
 
 const ConfirmListScreen = ({ list, setList, navigation }) => {
+  
   return (
     <>
       <ImageBackground source={{ uri: "https://p0.piqsels.com/preview/933/348/32/cart-chrome-commerce-dark.jpg" }} resizeMode="cover" style={styles.image}>

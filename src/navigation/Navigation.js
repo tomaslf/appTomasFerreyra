@@ -14,7 +14,7 @@ const Navigation = () => {
                 <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen name="ConfirmList" component={ConfirmListScreen} />
             </Stack.Navigator>
-        </NavigationContainer>
+        </NavigationContainer> 
 
 
     )
