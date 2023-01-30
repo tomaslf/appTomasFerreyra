@@ -6,8 +6,9 @@ import List from '../components/List'
 import colors from '../constants/colors'
 
 
-const ConfirmListScreen = ({ list, setList, navigation }) => {
-  
+const ConfirmListScreen = ({ list, setList }) => {
+  const navigation = useNavigation();
+
   return (
     <>
       <ImageBackground source={{ uri: "https://p0.piqsels.com/preview/933/348/32/cart-chrome-commerce-dark.jpg" }} resizeMode="cover" style={styles.image}>
